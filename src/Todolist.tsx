@@ -1,26 +1,41 @@
-export function Todolist() {
+import React, { FC } from 'react'
+import { Button } from './Button'
+
+export type TasksType = {
+  id: number
+  title: string
+  isDone: boolean
+}
+
+type TodolistPropsType = {
+  title: string
+  tasks: Array<TasksType>
+}
+
+export const Todolist: FC<TodolistPropsType> = ({ title, tasks }) => {
+  const tasksItems: JSX.Element = tasks.length !== 0
+  ? <ul>{tasks.map((task) => {
+      return (
+        <li>
+          <input type="checkbox" checked={task.isDone} />
+          <span>{task.title}</span>
+        </li>
+      )
+    })}</ul> : <span>Давай, до свидания</span>
+
+
   return (
     <div>
-      <h3>What to learn</h3>
+      <h3>{title}</h3>
       <div>
         <input />
-        <button>+</button>
+        <Button text="+" />
       </div>
-      <ul>
-        <li>
-          <input type="checkbox" checked={true} /> <span>HTML&CSS</span>
-        </li>
-        <li>
-          <input type="checkbox" checked={true} /> <span>JS</span>
-        </li>
-        <li>
-          <input type="checkbox" checked={false} /> <span>React</span>
-        </li>
-      </ul>
+      {tasksItems}
       <div>
-        <button>All</button>
-        <button>Active</button>
-        <button>Completed</button>
+        <Button text="All" />
+        <Button text="Active" />
+        <Button text="Completed" />
       </div>
     </div>
   )
