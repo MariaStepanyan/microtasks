@@ -1,45 +1,76 @@
 import React, { useState } from 'react'
-import { Rate } from './Rate'
-
-type FilterType = 'all' | 'dollars' | 'rubles'
+import { FullInput } from './components/FullInout'
 
 function App() {
-  const [money, setMoney] = useState([
-    { banknote: 'dollar', nominal: 100, number: 'a123456789' },
-    { banknote: 'dollar', nominal: 50, number: 'b123456789' },
-    { banknote: 'ruble', nominal: 100, number: 'c123456789' },
-    { banknote: 'dollar', nominal: 100, number: 'd123456789' },
-    { banknote: 'dollar', nominal: 50, number: 'e123456789' },
-    { banknote: 'ruble', nominal: 100, number: 'f123456789' },
-    { banknote: 'dollar', nominal: 50, number: 'j123456789' },
-    { banknote: 'ruble', nominal: 50, number: 'h123456789' },
+  const [message, setMessage] = useState([
+    { message: 'message1' },
+    { message: 'message2' },
+    { message: 'message3' },
+    { message: 'message4' },
+    { message: 'message5' },
   ])
 
-  const [filter, setfilter] = useState<FilterType>('all')
-  let currentMoney = money
-  if (filter === 'rubles') {
-    currentMoney = money.filter(
-      (filteredMoney) => filteredMoney.banknote === 'ruble'
-    )
+  const addMessage = (title: string) => {
+    const newMessage = { message: title }
+    setMessage([newMessage, ...message])
   }
-  if (filter === 'dollars') {
-    currentMoney = money.filter(
-      (filteredMoney) => filteredMoney.banknote === 'dollar'
-    )
-  }
-  const onClickFilterHandler = (buttonName: FilterType) => {
-    setfilter(buttonName)
-  }
+
   return (
-    <>
-      <Rate onClickFilterHandler = {onClickFilterHandler} currentMoney = {currentMoney}/>
-    </>
+    <div className="App">
+      <FullInput addMessage={addMessage} />
+      {message.map((el, index) => {
+        return <div key={index}>{el.message}</div>
+      })}
+    </div>
   )
 }
 
 export default App
 
-// microtask for useState
+// MICROTASK FOR FILTER
+
+// import React, { useState } from 'react'
+// import { Rate } from './Rate'
+
+// type FilterType = 'all' | 'dollars' | 'rubles'
+
+// function App() {
+//   const [money, setMoney] = useState([
+//     { banknote: 'dollar', nominal: 100, number: 'a123456789' },
+//     { banknote: 'dollar', nominal: 50, number: 'b123456789' },
+//     { banknote: 'ruble', nominal: 100, number: 'c123456789' },
+//     { banknote: 'dollar', nominal: 100, number: 'd123456789' },
+//     { banknote: 'dollar', nominal: 50, number: 'e123456789' },
+//     { banknote: 'ruble', nominal: 100, number: 'f123456789' },
+//     { banknote: 'dollar', nominal: 50, number: 'j123456789' },
+//     { banknote: 'ruble', nominal: 50, number: 'h123456789' },
+//   ])
+
+//   const [filter, setfilter] = useState<FilterType>('all')
+//   let currentMoney = money
+//   if (filter === 'rubles') {
+//     currentMoney = money.filter(
+//       (filteredMoney) => filteredMoney.banknote === 'ruble'
+//     )
+//   }
+//   if (filter === 'dollars') {
+//     currentMoney = money.filter(
+//       (filteredMoney) => filteredMoney.banknote === 'dollar'
+//     )
+//   }
+//   const onClickFilterHandler = (buttonName: FilterType) => {
+//     setfilter(buttonName)
+//   }
+//   return (
+//     <>
+//       <Rate onClickFilterHandler = {onClickFilterHandler} currentMoney = {currentMoney}/>
+//     </>
+//   )
+// }
+
+// export default App
+
+// MICROTASK FOR useState
 
 // function App() {
 //   let [a, setA] = useState(1)
@@ -62,7 +93,7 @@ export default App
 
 // export default App
 
-//microtask for button
+// MICROTASK FOR button
 
 // function App() {
 //   const foo1 = () => {
@@ -81,7 +112,7 @@ export default App
 
 // export default App
 
-//microtask for NewComponent
+// MICROTASK FOR NewComponent
 
 // import React, {useState} from 'react';
 // import { NewComponent } from './NewComponent';
