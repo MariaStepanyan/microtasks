@@ -1,4 +1,4 @@
-import { ChangeEvent, MouseEventHandler, useState } from 'react'
+import { ChangeEvent, useState } from 'react'
 
 type FullInputPropsType = {
   addMessage: (title: string) => void
